@@ -8,22 +8,30 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        Dealer d = new Dealer();
+        int count = 0;
+        for (int i = 0; i < 100000; i++) {
 
-        Player me = new Player();
-        Player you = new Player();
+            Dealer d = new Dealer();
 
-        d.join(me);
-        d.join(you);
+            Player me = new Player();
+            Player you = new Player();
 
-        d.start();
-        d.showHand();
+            d.join(me);
+            d.join(you);
 
-        List<Player> players = d.getRankingPlayers();
+            d.start();
+            d.showHand();
+            if (me.compareTo(you) == -1){
+                count++;
+            }
 
-        for (Player player : players) {
-            System.out.println(player.toString());
+//            System.out.println(me);
+//            System.out.println(you);
+//            System.out.println(d.getCommonCardList());
+//            System.out.println(me.compareTo(you));
         }
+        System.out.println(count);
+        System.out.println(count / 100000.0);
     }
 
 }

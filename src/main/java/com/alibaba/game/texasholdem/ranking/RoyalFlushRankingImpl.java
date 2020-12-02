@@ -1,12 +1,8 @@
 package com.alibaba.game.texasholdem.ranking;
 
-import com.alibaba.game.texasholdem.Card;
-import com.alibaba.game.texasholdem.CardRankEnum;
-import com.alibaba.game.texasholdem.Player;
-import com.alibaba.game.texasholdem.RankingEnum;
+import com.alibaba.game.texasholdem.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class {@code RoyalFlushRankingImpl}
@@ -17,23 +13,51 @@ public class RoyalFlushRankingImpl extends AbstractRanking {
     protected RankingResult doResolve(Player player) {
 
         RankingResult result = null;
-
+        Boolean isRoyal = false;
         List<Card> cards = player.getCards();
-        if (this.isSameSuit(cards)) { // 如果是同色
-            List<CardRankEnum> ranks = new ArrayList<CardRankEnum>();
-            for (Card card : cards) {
-                ranks.add(card.getRank());
-            }
-            if (ranks.contains(CardRankEnum.CARD_TEN) // 且是10 J Q K A
-                    && ranks.contains(CardRankEnum.CARD_JACK)
-                    && ranks.contains(CardRankEnum.CARD_QUEUE)
-                    && ranks.contains(CardRankEnum.CARD_KING)
-                    && ranks.contains(CardRankEnum.CARD_ACE)) {
-                result = new RankingResult();
-                result.setRankingEnum(RankingEnum.ROYAL_FLUSH);
-            }
+        int count = 0;
+        Map<CardSuitEnum,List<Integer>> suitMap = new HashMap<>();
+        for (Card card : cards) {
+            suitMap.putIfAbsent(card.getSuit(),new ArrayList<>());
+            suitMap.get(card.getSuit()).add(card.getRankNumber());
         }
 
+        Iterator<Map.Entry<CardSuitEnum, List<Integer>>> it = suitMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<CardSuitEnum, List<Integer>> next = it.next();
+            List<Integer> list = next.getValue();
+            if (list.size() >= 5){
+                int previousCard = -1;
+                for (Integer cardNum : list) {
+                    if (previousCard != -1) {
+                        if (cardNum - previousCard == -1) {
+                            count++;
+                            if (count == 4){
+                                if (list.get(0) == 14&&
+                                        list.get(1) == 13&&
+                                        list.get(2) == 12&&
+                                        list.get(3) == 11&&
+                                        list.get(4) == 10) {
+                                    isRoyal = true;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (cardNum - previousCard == 0){
+
+                        }
+                        else {
+                            count = 0;
+                        }
+                    }
+                    previousCard = cardNum;
+                }
+            }
+        }
+        if (isRoyal) {
+            result = new RankingResult();
+            result.setRankingEnum(RankingEnum.ROYAL_FLUSH);
+        }
         return result;
     }
 

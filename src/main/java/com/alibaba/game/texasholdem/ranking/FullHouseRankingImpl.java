@@ -5,6 +5,7 @@ import com.alibaba.game.texasholdem.RankingEnum;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Class {@code FullHouseRankingImpl}
@@ -18,17 +19,26 @@ public class FullHouseRankingImpl extends AbstractRanking {
 
         boolean isFullHouse = false;
         Map<Integer, Integer> rankCount = player.getCardsRankCountMap();
-
-        if (rankCount.size() == 2) {
-            Iterator<Map.Entry<Integer, Integer>> it = rankCount.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<Integer, Integer> next = it.next();
-                if (next.getValue() == 2 || next.getValue() == 3) {
-                    isFullHouse = true;
-                    break;
-                }
-            }
+        //3+2+1+1 or 3+2+2
+        if (rankCount.containsValue(3) && rankCount.containsValue(2)){
+            isFullHouse = true;
         }
+
+        //3+3+1
+        if (rankCount.containsValue(3) && rankCount.size() == 3){
+            isFullHouse = true;
+        }
+
+//        if (rankCount.size() == 2) {
+//            Iterator<Map.Entry<Integer, Integer>> it = rankCount.entrySet().iterator();
+//            while (it.hasNext()) {
+//                Map.Entry<Integer, Integer> next = it.next();
+//                if (next.getValue() == 2 || next.getValue() == 3) {
+//                    isFullHouse = true;
+//                    break;
+//                }
+//            }
+//        }
 
         if (isFullHouse) {
             result = new RankingResult();

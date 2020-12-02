@@ -10,39 +10,38 @@ public class RoyalFlushRankingImplTest extends TestCase {
     @Test
     public void testIsRoyalFlushRanking() {
 
-        Card card1 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_ACE);
-        Card card2 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_KING);
-        Card card3 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_QUEUE);
-        Card card4 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_JACK);
-        Card card5 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_TEN);
-
+        Card card14 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_ACE);
+        Card card13 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_KING);
+        Card card12 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_QUEUE);
+        Card card11 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_JACK);
+        Card card10 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_TEN);
+        Card card7 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_SEVEN);
+        Card card8 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_EIGHT);
+        Card card9 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_NINE);
+        Card card6 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_SIX);
+        Card card5 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_FIVE);
         Card otherSuitCard = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_TEN);
 
         Player p = new Player();
-        p.addCard(card1);
-        p.addCard(card2);
-        p.addCard(card3);
-        p.addCard(card4);
-        p.addCard(card5);
+        p.addCard(card14);
+        p.addCard(card12);
+        p.addCard(card11);
+        p.addCard(card13);
+        p.addCard(card10);
+        p.addCard(card7);
+        p.addCard(card8);
+        p.addCard(card9);
 
         IRanking ranking = new RoyalFlushRankingImpl();
 
         RankingResult result = ranking.resolve(p);
+        System.out.println(p);
         assertTrue(result != null);
 
         assertEquals(result.getRankingEnum(), RankingEnum.ROYAL_FLUSH);
 
-        Player p2 = new Player();
-        p2.addCard(card1);
-        p2.addCard(card2);
-        p2.addCard(card3);
-        p2.addCard(card4);
-        p2.addCard(otherSuitCard);
 
-        IRanking ranking2 = new RoyalFlushRankingImpl();
 
-        RankingResult result2 = ranking2.resolve(p2);
-        assertTrue(result2 == null);
 
     }
 

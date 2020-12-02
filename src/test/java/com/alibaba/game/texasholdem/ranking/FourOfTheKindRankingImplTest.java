@@ -15,7 +15,8 @@ public class FourOfTheKindRankingImplTest extends TestCase {
         Card card131313 = new Card(CardSuitEnum.SPADES, CardRankEnum.CARD_KING);
         Card card13131313 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_KING);
         Card card9 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_NINE);
-
+        Card card7 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_SEVEN);
+        Card card8 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_EIGHT);
         Card otherSuitCard = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_TEN);
 
         Player p = new Player();
@@ -24,10 +25,13 @@ public class FourOfTheKindRankingImplTest extends TestCase {
         p.addCard(card131313);
         p.addCard(card13131313);
         p.addCard(card9);
+        p.addCard(card7);
+        p.addCard(card8);
 
         IRanking ranking = new FourOfTheKindRankingImpl();
 
         RankingResult result = ranking.resolve(p);
+        System.out.println(p);
         assertTrue(result != null);
 
         assertEquals(result.getRankingEnum(), RankingEnum.FOUR_OF_THE_KIND);

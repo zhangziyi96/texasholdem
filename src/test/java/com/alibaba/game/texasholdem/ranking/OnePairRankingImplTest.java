@@ -15,6 +15,9 @@ public class OnePairRankingImplTest extends TestCase {
         Card card12 = new Card(CardSuitEnum.SPADES, CardRankEnum.CARD_QUEUE);
         Card card11 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_JACK);
         Card card9 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_NINE);
+        Card card6 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_SIX);
+        Card card7 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_SEVEN);
+        Card card131313 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_KING);
 
         Card otherSuitCard = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_TEN);
 
@@ -24,10 +27,14 @@ public class OnePairRankingImplTest extends TestCase {
         p.addCard(card11);
         p.addCard(card12);
         p.addCard(card9);
+        p.addCard(card6);
+        p.addCard(card7);
 
         IRanking ranking = new OnePairRankingImpl();
 
         RankingResult result = ranking.resolve(p);
+        System.out.println(p.toString());
+        System.out.println(result);
         assertTrue(result != null);
 
         assertEquals(result.getRankingEnum(), RankingEnum.ONE_PAIR);

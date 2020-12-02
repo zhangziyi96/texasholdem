@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * Class {@code OnePairRankingImpl}
- * 解析玩家手中的牌是不是一对(2+1+1+1)
+ * 解析玩家手中的牌是不是一对(2+1+1+1+1+1)
  */
 public class OnePairRankingImpl extends AbstractRanking {
 
@@ -19,7 +19,7 @@ public class OnePairRankingImpl extends AbstractRanking {
 
         boolean hasOne = false;
 
-        if (rankCount.size() == 4) {
+        if (rankCount.size() == 6) {
             Iterator<Map.Entry<Integer, Integer>> it = rankCount.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<Integer, Integer> next = it.next();

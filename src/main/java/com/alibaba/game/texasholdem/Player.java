@@ -13,9 +13,27 @@ public class Player implements Comparable<Player> {
 
     private List<Card> cards; // 玩家手上的五张牌
     private RankingResult rankingResult; // 牌型校验结果
+    private int straightNum = 0; //如果是顺子,则记录顺子最大的牌
+    private List<Integer> flushCards= new ArrayList<Integer>();
 
     public Player() {
         this.cards = new ArrayList<Card>();
+    }
+
+    public List<Integer> getFlushCards(){
+        return this.flushCards;
+    }
+
+    public void setFlushCards(List<Integer> list){
+        this.flushCards = list;
+    }
+
+    public void setStraightNum(int n){
+        straightNum = n;
+    }
+
+    public int getStraightNum(){
+        return straightNum;
     }
 
     /**

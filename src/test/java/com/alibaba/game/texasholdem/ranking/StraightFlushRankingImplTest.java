@@ -15,19 +15,27 @@ public class StraightFlushRankingImplTest extends TestCase {
         Card card11 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_JACK);
         Card card10 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_TEN);
         Card card9 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_NINE);
-
+        Card card7 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_SEVEN);
+        Card card6 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_SIX);
+        Card card5 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_FIVE);
+        Card card4 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_FOUR);
+        Card card3 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_THREE);
         Card otherSuitCard = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_TEN);
 
         Player p = new Player();
         p.addCard(card9);
         p.addCard(card10);
         p.addCard(card11);
-        p.addCard(card12);
-        p.addCard(card13);
+        p.addCard(card4);
+        p.addCard(card3);
+        p.addCard(card5);
+        p.addCard(card6);
+        p.addCard(card7);
 
         IRanking ranking = new StraightFlushRankingImpl();
 
         RankingResult result = ranking.resolve(p);
+        System.out.println(p);
         assertTrue(result != null);
 
         assertEquals(result.getRankingEnum(), RankingEnum.STRAIGHT_FLUSH);

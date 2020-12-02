@@ -1,10 +1,11 @@
 package com.alibaba.game.texasholdem.ranking;
 
 import com.alibaba.game.texasholdem.Card;
+import com.alibaba.game.texasholdem.CardSuitEnum;
 import com.alibaba.game.texasholdem.Player;
 import com.alibaba.game.texasholdem.RankingEnum;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Class {@code StraightFlushRankingImpl}
@@ -15,26 +16,51 @@ public class StraightFlushRankingImpl extends AbstractRanking {
     protected RankingResult doResolve(Player player) {
 
         RankingResult result = null;
-
+        Boolean isStraight = false;
         List<Card> cards = player.getCards();
-        if (this.isSameSuit(cards)) { // 如果是同色
-            boolean isStraight = true;
-            Card previousCard = null;
-            for (Card card : cards) {
-                if (previousCard != null) {
-                    if (card.getRank().getNumber() - previousCard.getRank().getNumber() != -1) {
-                        isStraight = false;
-                        break;
+        int count = 0;
+        
+        Map<CardSuitEnum,List<Integer>> suitMap = new HashMap<>();
+        for (Card card : cards) {
+            suitMap.putIfAbsent(card.getSuit(),new ArrayList<>());
+            suitMap.get(card.getSuit()).add(card.getRankNumber());
+        }
+
+        Iterator<Map.Entry<CardSuitEnum, List<Integer>>> it = suitMap.entrySet().iterator();
+        int previousCard = -1;
+        while (it.hasNext()) {
+            Map.Entry<CardSuitEnum, List<Integer>> next = it.next();
+            List<Integer> list = next.getValue();
+            if (list.size() >= 5){
+                for (Integer cardNum : list) {
+                    if (previousCard != -1) {
+                        if (cardNum - previousCard == -1) {
+                            count++;
+                            if (count == 4){
+                                isStraight = true;
+                                break;
+                            }
+                        }
+                        else if (cardNum - previousCard == 0){
+
+                        }
+                        else {
+                            count = 0;
+                        }
                     }
+                    previousCard = cardNum;
                 }
-                previousCard = card;
             }
+        }
+
             if (isStraight == true) {
                 result = new RankingResult();
                 result.setRankingEnum(RankingEnum.STRAIGHT_FLUSH);
+                player.setStraightNum(previousCard + 3);
+
             }
 
-        }
+
 
         return result;
     }

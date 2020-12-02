@@ -17,24 +17,34 @@ public class StraightRankingImpl extends AbstractRanking {
         RankingResult result = null;
 
         List<Card> cards = player.getCards();
-        if (!this.isSameSuit(cards)) { // 如果是同色
-            boolean isStraight = true;
-            Card previousCard = null;
-            for (Card card : cards) {
-                if (previousCard != null) {
-                    if (card.getRank().getNumber() - previousCard.getRank().getNumber() != -1) {
-                        isStraight = false;
+
+        boolean isStraight = false;
+        Card previousCard = null;
+        int count = 0;
+        for (Card card : cards) {
+            if (previousCard != null) {
+                if (card.getRank().getNumber() - previousCard.getRank().getNumber() == -1) {
+                    count++;
+                    if (count == 4){
+                        isStraight = true;
                         break;
                     }
                 }
-                previousCard = card;
-            }
-            if (isStraight == true) {
-                result = new RankingResult();
-                result.setRankingEnum(RankingEnum.STRAIGHT);
-            }
+                else if (card.getRank().getNumber() - previousCard.getRank().getNumber() == 0){
 
+                }
+                else {
+                    count = 0;
+                }
+            }
+            previousCard = card;
         }
+        if (isStraight == true) {
+            result = new RankingResult();
+            result.setRankingEnum(RankingEnum.STRAIGHT);
+            player.setStraightNum(previousCard.getRankNumber() + 3);
+        }
+
 
         return result;
     }

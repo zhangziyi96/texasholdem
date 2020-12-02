@@ -31,6 +31,7 @@ public abstract class AbstractRanking implements IRanking {
 
     protected abstract RankingResult doResolve(Player player);
 
+    //7张牌5张同色即可
     protected boolean isSameSuit(List<Card> cards) {
         if (cards == null || cards.size() == 0) {
             return false;

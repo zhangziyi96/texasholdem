@@ -18,6 +18,10 @@ public class Poker {
         this.init();
     }
 
+    public List<Card> getCards(){
+        return cards;
+    }
+
     private void init() {
         this.cards = new ArrayList<Card>();
         for (CardSuitEnum suitEnum : CardSuitEnum.values()) {
