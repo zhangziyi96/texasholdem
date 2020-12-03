@@ -51,24 +51,24 @@ public class Dealer {
     public void start() {
 
         //测试用
-        Card card1 = new Card(CardSuitEnum.HEARTS,CardRankEnum.CARD_QUEUE);
-        Card card2 = new Card(CardSuitEnum.HEARTS,CardRankEnum.CARD_KING);
-        this.poker.getCards().remove(card1);
-        this.poker.getCards().remove(card2);
-        this.playerList.get(0).addCard(card1);
-        this.playerList.get(0).addCard(card2);
-
-        dispatchCommonCard();
-        this.playerList.get(1).addCard(this.poker.dispatch());
-        this.playerList.get(1).addCard(this.poker.dispatch());
+//        Card card1 = new Card(CardSuitEnum.HEARTS,CardRankEnum.CARD_ACE);
+//        Card card2 = new Card(CardSuitEnum.HEARTS,CardRankEnum.CARD_TEN);
+//        this.poker.getCards().remove(card1);
+//        this.poker.getCards().remove(card2);
+//        this.playerList.get(0).addCard(card1);
+//        this.playerList.get(0).addCard(card2);
+//
+//        dispatchCommonCard();
+//        this.playerList.get(1).addCard(this.poker.dispatch());
+//        this.playerList.get(1).addCard(this.poker.dispatch());
 
         //发公共牌
-//        dispatchCommonCard();
-//        for (int i = 0; i < this.playerList.size(); i++) {
-//            for (int j = 0; j < 2; j++) {
-//                this.playerList.get(i).addCard(this.poker.dispatch());
-//            }
-//        }
+        dispatchCommonCard();
+        for (int i = 0; i < this.playerList.size(); i++) {
+            for (int j = 0; j < 2; j++) {
+                this.playerList.get(i).addCard(this.poker.dispatch());
+            }
+        }
     }
 
     /**

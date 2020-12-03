@@ -9,7 +9,7 @@ import com.alibaba.game.texasholdem.Player;
 public class HighCardComparingImpl extends AbstractComparing {
 
     public int compare(Player o1, Player o2) {
-        return this.seqComparing(o1, o2);
+        return this.highCardComparing(o1, o2);
     }
 
 }

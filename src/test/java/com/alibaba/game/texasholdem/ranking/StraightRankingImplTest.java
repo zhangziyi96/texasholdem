@@ -21,17 +21,21 @@ public class StraightRankingImplTest extends TestCase {
         Card card7 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_SEVEN);
         Card card6 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_SIX);
         Card card5 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_FIVE);
+        Card card4 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_FOUR);
+        Card card3 = new Card(CardSuitEnum.HEARTS, CardRankEnum.CARD_THREE);
+        Card card2 = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_TWO);
+        Card card1 = new Card(CardSuitEnum.CLUBS, CardRankEnum.CARD_ACE);
 
         Card otherSuitCard = new Card(CardSuitEnum.DIAMONDS, CardRankEnum.CARD_TEN);
 
         Player p = new Player();
         p.addCard(card9);
+        p.addCard(card4);
         p.addCard(card10);
-        p.addCard(card1010);
-        p.addCard(card8);
-        p.addCard(card6);
-        p.addCard(card12);
-        p.addCard(card7);
+        p.addCard(card5);
+        p.addCard(card3);
+        p.addCard(card2);
+        p.addCard(card1);
 
         IRanking ranking = new StraightRankingImpl();
 

@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         int count = 0;
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 500000; i++) {
 
             Dealer d = new Dealer();
 
@@ -31,7 +31,7 @@ public class Main {
 //            System.out.println(me.compareTo(you));
         }
         System.out.println(count);
-        System.out.println(count / 100000.0);
+        System.out.println(count / 500000.0);
     }
 
 }

@@ -72,6 +72,24 @@ public abstract class AbstractComparing implements IComparing {
         return 0;
     }
 
+    protected int highCardComparing(Player p1,Player p2){
+        List<Card> cards1 = p1.getCards();
+        List<Card> cards2 = p2.getCards();
+        int size = cards1.size();
+        for (int i = 0; i < size; i++) {
+            if (cards1.get(i).getRank().getNumber() > cards2.get(i).getRank().getNumber()){
+                return -1;
+            }
+            if (cards1.get(i).getRank().getNumber() < cards2.get(i).getRank().getNumber()){
+                return 1;
+            }
+            if (cards1.get(i).getRank().getNumber() == cards2.get(i).getRank().getNumber()){
+                continue;
+            }
+        }
+        return 0;
+    }
+
     /**
      * 按照顺序的比较
      *

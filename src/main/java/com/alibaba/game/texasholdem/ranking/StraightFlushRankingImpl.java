@@ -19,7 +19,7 @@ public class StraightFlushRankingImpl extends AbstractRanking {
         Boolean isStraight = false;
         List<Card> cards = player.getCards();
         int count = 0;
-        
+        Map<Integer, Integer> rankCount = player.getCardsRankCountMap();
         Map<CardSuitEnum,List<Integer>> suitMap = new HashMap<>();
         for (Card card : cards) {
             suitMap.putIfAbsent(card.getSuit(),new ArrayList<>());
@@ -38,6 +38,14 @@ public class StraightFlushRankingImpl extends AbstractRanking {
                             count++;
                             if (count == 4){
                                 isStraight = true;
+                                player.setStraightNum(previousCard + 3);//记录顺子的大小，方便同牌型比较用
+                                break;
+                            }
+
+                            //出现12345的情况
+                            if (count == 3 && cardNum == 2 && rankCount.containsKey(14)){
+                                isStraight = true;
+                                player.setStraightNum(previousCard + 2);//记录顺子的大小，方便同牌型比较用
                                 break;
                             }
                         }
@@ -56,8 +64,6 @@ public class StraightFlushRankingImpl extends AbstractRanking {
             if (isStraight == true) {
                 result = new RankingResult();
                 result.setRankingEnum(RankingEnum.STRAIGHT_FLUSH);
-                player.setStraightNum(previousCard + 3);
-
             }
 
 
